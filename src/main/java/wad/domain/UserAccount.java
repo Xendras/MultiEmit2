@@ -1,7 +1,11 @@
 
 package wad.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -16,7 +20,8 @@ public class UserAccount extends AbstractPersistable<Long>{
     @Length(min = 5, max = 21)
     private String password;
     @NotBlank
-    private String authority;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> authorities;
     
     public String getUsername(){
         return this.username;
@@ -34,12 +39,15 @@ public class UserAccount extends AbstractPersistable<Long>{
         this.password = newPassword;
     }
     
-    public String getAuthority(){
-        return this.authority;
+    public List<String> getAuthorities(){
+        if (this.authorities == null) {
+            this.authorities = new ArrayList<>();
+        }
+        return this.authorities;
     }
     
-    public void setAuthority(String newAuthority){
-        this.authority = newAuthority;
+    public void setAuthorities(List<String> newAuthorities){
+        this.authorities = newAuthorities;
     }
     
 }
