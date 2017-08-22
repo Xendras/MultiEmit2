@@ -1,7 +1,9 @@
 
 package wad.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,6 +25,11 @@ public class CustomUserDetailsService implements UserDetailsService{
         if (account == null) {
             throw new UsernameNotFoundException("No such user: " + username);
         }
+        
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+        for (String authority : account.getAuthorities()) {
+            authorities.add(new SimpleGrantedAuthority(authority));
+        }
 
         return new org.springframework.security.core.userdetails.User(
                 account.getUsername(),
@@ -31,7 +38,7 @@ public class CustomUserDetailsService implements UserDetailsService{
                 true,
                 true,
                 true,
-                Arrays.asList(new SimpleGrantedAuthority(account.getAuthority())));
+                authorities);
     }
     
 }
