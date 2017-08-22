@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+    <head>
+        <title> MultiEmit </title>
+    </head>
+    <body>
+        <h1> MultiEmit </h1>
+
+        <ul style="list-style-type:none">
+            <li><a th:href="@{/competitions}" th:text="Competitions">Competition link</a></li>
+            <li><a th:href="@{/competitors}" th:text="Competitors">Competitor link</a></li>
+            <li><a sec:authorize ="hasAuthority('ADMIN')" th:href="@{/emits}" th:text="Emits">Emits link</a></li>
+        </ul>
+    </body>
+</html>

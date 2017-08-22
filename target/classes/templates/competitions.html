@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+    <head>
+        <title> Competitions </title>
+    </head>
+    <body>
+        <h1>Competitions</h1>
+
+        <h2>Add new competition</h2>
+
+        <div>
+            Enter information and press Submit:<br/>
+            <form action="#" th:action="@{/competitions}" th:object="${competition}" method="POST">
+                Name: <input type="text" th:field="*{name}"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error message</span><br/>
+                Location: <input type="text" th:field="*{location}"/>
+                <span th:if="${#fields.hasErrors('location')}" th:errors="*{location}">Location error message</span><br/>
+                Date: <input type="date" th:field="*{date}"/>
+                <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date error message</span><br/>
+                <input type="submit"/>            
+            </form>
+        </div>
+
+        <h2>Current competitions</h2>
+
+        <ol>
+            <li th:each="competition : ${competitions}">
+                <span th:text="${competition.name}">competition name</span>
+                    at <span th:text="${competition.location}">competition location</span>
+                    on the <span th:text="${#dates.format(competition.date, 'yyyy-MM-dd')}">competition date</span>
+                <a th:href="@{/competitions/{competitionId}(competitionId=${competition.id})}" th:text="View">View competition</a>
+            </li>
+        </ol>
+    </body>
+</html>
