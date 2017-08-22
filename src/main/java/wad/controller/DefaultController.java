@@ -24,11 +24,13 @@ public class DefaultController {
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setAuthorities(Arrays.asList("ADMIN", "USER"));
+        userAccountRepository.save(admin);
         
         UserAccount user = new UserAccount();
         user.setUsername("user");
         user.setPassword(passwordEncoder.encode("user"));
         user.setAuthorities(Arrays.asList("USER"));
+        userAccountRepository.save(user);
     }
     
 
