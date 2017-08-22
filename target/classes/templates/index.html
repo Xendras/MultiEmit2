@@ -9,7 +9,7 @@
         <ul style="list-style-type:none">
             <li><a th:href="@{/competitions}" th:text="Competitions">Competition link</a></li>
             <li><a th:href="@{/competitors}" th:text="Competitors">Competitor link</a></li>
-            <li><a sec:authorize ="hasAuthority('ADMIN')" th:href="@{/emits}" th:text="Emits">Emits link</a></li>
+            <li><a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/emits}" th:text="Emits">Emits link</a></li>
         </ul>
     </body>
 </html>

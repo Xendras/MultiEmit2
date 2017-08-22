@@ -1,8 +1,8 @@
 wad\service\CompetitionService.class
 wad\domain\Competition.class
-wad\config\DevelopmentSecurityConfiguration.class
 wad\domain\Competitor.class
 wad\domain\Result.class
+wad\config\DefaultSecurityConfiguration.class
 wad\controller\EmitController.class
 wad\profile\ProductionProfile.class
 wad\config\ProductionSecurityConfiguration.class
