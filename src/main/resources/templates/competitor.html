@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
     <head>
-        <title> Competitors </title>
+        <title th:text="${competitor.name}"> Competitor </title>
     </head>
     <body>
-        <h1> Competitors </h1>
+        <h1 th:text="${competitor.name}"> Competitor name </h1>
+
+        <h2>Competitor information</h2>
+
+        <div>
+            Name: <span th:text="${competitor.name}"/><br/>
+            Club: <span th:text="${competitor.club}"/><br/>
+            Emit: <a th:href="@{/competitors/{competitorId}(competitorId=${competitor.id})}" th:text="${competitor.emit.number}"/><br/>      
+        </div>
+        <form th:action="@{/competitors/{competitorId}(competitorId=${competitor.id})}" th:method="DELETE">
+            <input type="submit" value="Remove" th:id="${'remove-' + competitor.id}"/>
+        </form>
     </body>
 </html>

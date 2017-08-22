@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.Digits;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.Length;
+import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -15,18 +15,18 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class Emit extends AbstractPersistable<Long>{
     
     @NotBlank
-    @Digits(integer = 6, fraction = 0)
-    private Integer number;   
-    @NotNull
+    @Pattern(regexp="\\(|\\)|\\d{6}", message = "Emit number must be 6 digits long")
+    private String number;   
+    @OneToOne
     private Competitor owner;
     @OneToMany
     private List<EmitPunch> emitPunches;
     
-    public Integer getInteger() {
+    public String getNumber() {
         return this.number;
     }
 
-    public void setNumber(Integer newNumber) {
+    public void setNumber(String newNumber) {
         this.number = newNumber;
     }
 

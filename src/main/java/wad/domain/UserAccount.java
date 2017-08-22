@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
@@ -17,9 +18,9 @@ public class UserAccount extends AbstractPersistable<Long>{
     @Length(min = 2, max = 10)
     private String username;
     @NotBlank
-    @Length(min = 5, max = 21)
+    @Length(min = 2, max = 21)
     private String password;
-    @NotBlank
+    @NotEmpty
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> authorities;
     

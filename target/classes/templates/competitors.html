@@ -5,5 +5,31 @@
     </head>
     <body>
         <h1> Competitors </h1>
+        
+        <h2>Add new competitor</h2>
+
+        <div>
+            Enter information and press Submit:<br/>
+            <form action="#" th:action="@{/competitors}" th:object="${competitor}" method="POST">
+                Name: <input type="text" th:field="*{name}"/>
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error message</span><br/>
+                Club: <input type="text" th:field="*{club}"/>
+                <span th:if="${#fields.hasErrors('club')}" th:errors="*{club}">Club error message</span><br/>
+                Emit number: <input type="text" th:field="*{emitNumber}"/>
+                <span th:if="${#fields.hasErrors('emitNumber')}" th:errors="*{emitNumber}">Emit number error message</span><br/>
+                <input type="submit"/>            
+            </form>
+        </div>
+
+        <h2>Current competitors</h2>
+
+        <ol>
+            <li th:each="competitor : ${competitors}">
+                <span th:text="${competitor.name}">competitor name</span>
+                , <span th:text="${competitor.club}">competitor club</span>
+                , emit: <span th:text="${competitor.emitNumber}">competitor emit</span>
+                <a th:href="@{/competitors/{competitorId}(competitorId=${competitor.id})}" th:text="View">View competitor</a>
+            </li>
+        </ol>
     </body>
 </html>

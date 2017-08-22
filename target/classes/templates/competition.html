@@ -30,7 +30,7 @@
         <h2>Results</h2>
 
         <ol>
-            <li th:each="result : ${results}">
+            <li th:each="result : ${competition.results}">
                 <form th:action="@{/competitions/{id}/results/{resultId}(id=${competition.id},resultId=${result.id})}" th:method="DELETE">
                     <input type="submit" value="Remove" th:id="${'remove-' + result.id}"/>
                 </form>
@@ -42,20 +42,18 @@
                 </ul>
             </li>
         </ol>
-        
-        <!--
+
+
         <div>
             Enter information and press Submit:<br/>
-            <form action="#" th:action="@{/competitions/{id}(id=${competition.id})}" th:object="${result}" method="POST">
-                Name: <input type="text" th:field="*{name}"/>
-                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error message</span><br/>
-                Location: <input type="text" th:field="*{location}"/>
-                <span th:if="${#fields.hasErrors('location')}" th:errors="*{location}">Location error message</span><br/>
-                Date: <input type="date" th:field="*{date}"/>
-                <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}">Date error message</span><br/>
-                <input type="submit"/>            
+            <form th:action="@{/competitions/{id}/results(id=${competition.id})}"  method="POST">
+                Name: 
+                <select>
+                    <option th:each="competitor : ${competitors}" th:value="${competitor}" th:text="${competitor.name}">competitor</option>
+                </select>    
+                <input type="submit" value="Add result"/>
             </form>
         </div>
-        -->
+
     </body>
 </html>
