@@ -1,4 +1,5 @@
 wad\service\EmitService.class
+wad\service\EmitPunchService.class
 wad\service\CompetitionService.class
 wad\domain\Competition.class
 wad\domain\Competitor.class
@@ -14,6 +15,7 @@ wad\domain\Emit.class
 wad\domain\EmitPunch.class
 wad\repository\CompetitorRepository.class
 wad\repository\EmitPunchRepository.class
+wad\service\ResultService.class
 wad\config\InitSecurityConfiguration.class
 wad\MultiEmitApplication.class
 wad\controller\ResultController.class

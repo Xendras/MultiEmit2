@@ -1,9 +1,10 @@
 
 package wad.domain;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.Pattern;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
@@ -14,10 +15,21 @@ public class Competitor extends AbstractPersistable<Long>{
     private String name;
     @OneToOne
     private Emit emit;
-    @Pattern(regexp="\\(|\\)|\\d{6}", message = "Emit number must be 6 digits long")
     private String emitNumber;
     @NotBlank
     private String club;
+    @OneToMany
+    private List<Result> results;
+    
+    public Competitor() {
+
+    }
+
+    public Competitor(String name, String club, Emit emit) {
+        this.name = name;
+        this.club = club;
+        this.emit = emit;
+    }
     
     public String getName() {
         return this.name;
@@ -25,6 +37,14 @@ public class Competitor extends AbstractPersistable<Long>{
 
     public void setName(String newName) {
         this.name = newName;
+    }
+    
+    public String getEmitNumber() {
+        return this.emitNumber;
+    }
+
+    public void setEmitNumber(String newEmitNumber) {
+        this.emitNumber = newEmitNumber;
     }
 
     public Emit getEmit() {
@@ -35,20 +55,20 @@ public class Competitor extends AbstractPersistable<Long>{
         this.emit = newEmit;
     }
     
-    public String getEmitNumber() {
-        return this.emitNumber;
-    }
-
-    public void setEmitNumber(String newEmitNumber) {
-        this.emitNumber = newEmitNumber;
-    }
-    
     public String getClub() {
         return this.club;
     }
 
-    public void setclub(String newClub) {
+    public void setClub(String newClub) {
         this.club = newClub;
+    }
+    
+    public List<Result> getResults() {
+        return this.results;
+    }
+
+    public void setResults(List<Result> newResults) {
+        this.results = newResults;
     }
     
 }

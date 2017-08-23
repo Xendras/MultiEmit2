@@ -14,7 +14,7 @@
             Date: <span th:text="${competition.date}"/><br/>      
         </div>
         <form th:action="@{/competitions/{id}(id=${competition.id})}" th:method="DELETE">
-            <input type="submit" value="Remove" th:id="${'remove-' + competition.id}"/>
+            <input type="submit" value="Remove competition" th:id="${'remove-' + competition.id}"/>
         </form>
 
         <h2>Competitors</h2>
@@ -24,36 +24,48 @@
                 <span th:text="${competitor.name}">competitor name</span>
                 , <span th:text="${competitor.club}">competitor club</span>
                 , <span th:text="${competitor.emit.number}">competitor emit</span>
+                <form th:action="@{/competitions/{id}/competitors/{competitorId}(id=${competition.id}, competitorId=${competitor.id})}" th:method="DELETE">
+                    <input type="submit" value="Remove competitor" th:id="${'remove-' + competitor.id}"/>
+                </form>
             </li>
         </ol>
+        <form th:action="@{/competitions/{id}(id=${competition.id})}"  method="POST">
+            <select name = "competitorId">
+                <option th:each="competitor : ${competitors}" th:value="${competitor.id}" th:text="${competitor.name}+' '+${competitor.emit.number}">competitor</option>
+            </select>    
+            <input type="submit" value="Add competitor"/>
+        </form>
 
         <h2>Results</h2>
 
         <ol>
             <li th:each="result : ${competition.results}">
-                <form th:action="@{/competitions/{id}/results/{resultId}(id=${competition.id},resultId=${result.id})}" th:method="DELETE">
+                <span th:text="${result.competitor.name}">competitor name</span>, 
+                <span th:text="${result.competitor.club}">competitor club</span>, 
+                <span th:text="${result.competitor.emit.number}">competitor emit</span> 
+                <form th:action="@{/competitions/{id}/results/{resultId}(id=${competition.id},resultId=${result.id})}" th:method="DELETE"> 
                     <input type="submit" value="Remove" th:id="${'remove-' + result.id}"/>
                 </form>
-                <span th:text="${result.competitor.name}">competitor name</span>
-                , <span th:text="${result.competitor.club}">competitor club</span>
-                , <span th:text="${competitor.emit.number}">competitor emit</span>
-                <ul th:each="split : ${result.splits}">
-                    <li><a th:text="${#dates.format(split.timestamp, 'm-s')}"></a></li>
+                Splits:
+                <ul th:each="printableSplit : ${result.printableSplits}">
+                    <li><a th:text="${printableSplit}"></a></li>
                 </ul>
             </li>
         </ol>
-
 
         <div>
             Enter information and press Submit:<br/>
             <form th:action="@{/competitions/{id}/results(id=${competition.id})}"  method="POST">
                 Name: 
                 <select>
-                    <option th:each="competitor : ${competitors}" th:value="${competitor}" th:text="${competitor.name}">competitor</option>
-                </select>    
+                    <option th:each="competitor : ${competitionCompetitors}" th:value="${competitor}" th:text="${competitor.name}">competitor</option>
+                </select>  
+                Add emit punches:
                 <input type="submit" value="Add result"/>
             </form>
         </div>
 
+        
+        <a th:href="@{/index}" th:text="Index">View index</a>
     </body>
 </html>

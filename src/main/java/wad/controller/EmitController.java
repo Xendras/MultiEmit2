@@ -43,6 +43,12 @@ public class EmitController {
             viewEmits(model);
             return "emits";
         }
+        String number = emit.getNumber();
+        for(Emit otherEmit : emitService.getEmits()){
+            if(otherEmit.getNumber().equals(number)){
+                return "redirect:/emits";
+            }
+        }
         emitService.saveEmit(emit);
         return "redirect:/emits";
     }
@@ -52,7 +58,7 @@ public class EmitController {
         Emit emit = emitService.getEmit(id);
         model.addAttribute("emit", emit);
         model.addAttribute("emitPunches", emit.getEmitPunches());
-        return "competitor";
+        return "emit";
     }
     
     @RequestMapping(value = "/emits/{id}", method = RequestMethod.DELETE)

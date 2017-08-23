@@ -1,11 +1,11 @@
 package wad.service;
 
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wad.domain.Competitor;
 import wad.domain.Emit;
+import wad.domain.Result;
 import wad.repository.CompetitorRepository;
 import wad.repository.EmitRepository;
 
@@ -16,7 +16,10 @@ public class CompetitorService {
     private CompetitorRepository competitorRepository;
 
     @Autowired
-    private EmitRepository emitRepository;
+    private EmitService emitService;
+    
+    @Autowired
+    private ResultService resultService;
 
     public void saveCompetitor(Competitor competitor) {
         competitorRepository.save(competitor);
@@ -35,11 +38,19 @@ public class CompetitorService {
         Emit emit = competitor.getEmit();
         emit.setCompetitor(null);
         competitor.setEmit(null);
+        List<Result> results = competitor.getResults();
+        for(Result result : results){
+            result.setCompetitor(null);
+        }
+        competitor.setResults(null);
+        for(Result result : results){
+            resultService.deleteResult(result.getId());
+        }
         competitorRepository.delete(id);
     }
 
     public void registerEmitForCompetitor(Competitor competitor, String emitNumber) {
-        Emit emit = emitRepository.findByNumber(emitNumber);
+        Emit emit = emitService.getByNumber(emitNumber);
         if (emit == null) {
             emit = new Emit();
             emit.setNumber(emitNumber);
@@ -52,7 +63,7 @@ public class CompetitorService {
             return;
         }
         competitorRepository.save(competitor);
-        emitRepository.save(emit);
+        emitService.saveEmit(emit);
     }
 
 }

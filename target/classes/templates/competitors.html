@@ -25,11 +25,13 @@
 
         <ol>
             <li th:each="competitor : ${competitors}">
-                <span th:text="${competitor.name}">competitor name</span>
-                , <span th:text="${competitor.club}">competitor club</span>
-                , emit: <span th:text="${competitor.emitNumber}">competitor emit</span>
+                <span th:text="${competitor.name}">competitor name</span>, 
+                <span th:text="${competitor.club}">competitor club</span>, 
+                emit: <span th:text="${competitor.emit.number}">competitor emit</span>
                 <a th:href="@{/competitors/{competitorId}(competitorId=${competitor.id})}" th:text="View">View competitor</a>
             </li>
         </ol>
+        
+        <a th:href="@{/index}" th:text="Index">View index</a>
     </body>
 </html>

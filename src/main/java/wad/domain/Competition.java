@@ -35,6 +35,16 @@ public class Competition extends AbstractPersistable<Long> {
     @OneToMany
     @ElementCollection
     private List<Result> results;
+    
+    public Competition() {
+
+    }
+
+    public Competition(String name, String location, Date date) {
+        this.name = name;
+        this.location = location;
+        this.date = date;
+    }
 
     public String getLocation() {
         return this.location;

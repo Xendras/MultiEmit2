@@ -1,4 +1,3 @@
-
 package wad.domain;
 
 import java.util.ArrayList;
@@ -12,16 +11,24 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Emit extends AbstractPersistable<Long>{
-    
+public class Emit extends AbstractPersistable<Long> {
+
     @NotBlank
-    @Pattern(regexp="\\(|\\)|\\d{6}", message = "Emit number must be 6 digits long")
-    private String number;   
+    @Pattern(regexp = "\\(|\\)|\\d{6}", message = "Emit number must be 6 digits long")
+    private String number;
     @OneToOne
     private Competitor owner;
     @OneToMany
     private List<EmitPunch> emitPunches;
-    
+
+    public Emit() {
+
+    }
+
+    public Emit(String number) {
+        this.number = number;
+    }
+
     public String getNumber() {
         return this.number;
     }
@@ -37,7 +44,7 @@ public class Emit extends AbstractPersistable<Long>{
     public void setCompetitor(Competitor newOwner) {
         this.owner = newOwner;
     }
-    
+
     public List<EmitPunch> getEmitPunches() {
         if (this.emitPunches == null) {
             this.emitPunches = new ArrayList<>();
@@ -48,5 +55,5 @@ public class Emit extends AbstractPersistable<Long>{
     public void setEmitPunches(List<EmitPunch> newEmitPunches) {
         this.emitPunches = newEmitPunches;
     }
-    
+
 }

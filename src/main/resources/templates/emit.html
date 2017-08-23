@@ -9,10 +9,10 @@
         <h2>Emit information</h2>
 
         <div>
-            Number: <span th:text="${emit.name}"/><br/>
-            Owner: <a th:href="@{/competitors/{competitorId}(competitorId=${emit.owner.id})}" th:text="${emit.owner.name}"/><br/>
+            Number: <span th:text="${emit.number}"/><br/>
+            Owner: <a th:if="${emit.owner != null}" th:href="@{/competitors/{competitorId}(competitorId=${emit.owner.id})}" th:text="${emit.owner.name}"/><br/>
             Emit punches:     
-            <ol th:each = "punch : ${emitPunches}">
+            <ol th:each = "punch : ${emit.emitPunches}">
                 <li>
                 <span th:text="${punch.punchCode}">punch code</span>
                 <span th:text="${punch.timestamp}">punch timestamp</span>
@@ -25,5 +25,7 @@
         <form th:action="@{/emits/{emitId}(emitId=${emit.id})}" th:method="DELETE">
             <input type="submit" value="Remove emit" th:id="${'remove-' + emit.id}"/>
         </form>
+        
+        <a th:href="@{/index}" th:text="Index">View index</a>
     </body>
 </html>

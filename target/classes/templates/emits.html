@@ -21,10 +21,12 @@
 
         <ol>
             <li th:each="emit : ${emits}">
-                <span th:text="${emit.number}">emit card number</span>
-                , <span th:text="${emit.owner.name}">emit owner name</span>
-                <a th:href="@{/emits/{emitId}(emitId=${emit.id})}" th:text="View emit">View emit</a>
+                <span th:text="${emit.number}">emit card number</span>, 
+                <span th:if="${emit.owner != null}" th:text="${emit.owner.name}">emit owner name</span>
+                <a th:href="@{/emits/{emitId}(emitId=${emit.id})}" th:text="View">View emit</a>
             </li>
         </ol>
+        
+        <a th:href="@{/index}" th:text="Index">View index</a>
     </body>
 </html>

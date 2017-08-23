@@ -3,6 +3,7 @@ package wad.domain;
 
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -13,12 +14,23 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class EmitPunch extends AbstractPersistable<Long>{
     
     @NotNull
+    @OneToOne
     private Emit emit;
     @NotBlank
     private String punchCode;
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     private Date timestamp;
+    
+    public EmitPunch() {
+
+    }
+
+    public EmitPunch(Emit emit, String code, Date timestamp) {
+        this.emit = emit;
+        this.punchCode = code;
+        this.timestamp = timestamp;
+    }
     
     public Emit getEmit(){
         return this.emit;

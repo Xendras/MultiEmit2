@@ -11,10 +11,12 @@
         <div>
             Name: <span th:text="${competitor.name}"/><br/>
             Club: <span th:text="${competitor.club}"/><br/>
-            Emit: <a th:href="@{/competitors/{competitorId}(competitorId=${competitor.id})}" th:text="${competitor.emit.number}"/><br/>      
+            Emit: <a th:href="@{/emits/{emitId}(emitId=${competitor.emit.id})}" th:text="${competitor.emit.number}"/><br/>      
         </div>
         <form th:action="@{/competitors/{competitorId}(competitorId=${competitor.id})}" th:method="DELETE">
             <input type="submit" value="Remove" th:id="${'remove-' + competitor.id}"/>
         </form>
+        
+        <a href="@{/index}" th:text="Index">View index</a>
     </body>
 </html>
