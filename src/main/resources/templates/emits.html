@@ -5,5 +5,26 @@
     </head>
     <body>
         <h1> Emit cards </h1>
+        
+        <h2>Add new emit card</h2>
+
+        <div>
+            Enter information and press Submit:<br/>
+            <form action="#" th:action="@{/emits}" th:object="${emit}" method="POST">
+                Emit number: <input type="text" th:field="*{number}"/>
+                <span th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Number error message</span><br/>
+                <input type="submit"/>            
+            </form>
+        </div>
+
+        <h2>Current emit cards</h2>
+
+        <ol>
+            <li th:each="emit : ${emits}">
+                <span th:text="${emit.number}">emit card number</span>
+                , <span th:text="${emit.owner.name}">emit owner name</span>
+                <a th:href="@{/emits/{emitId}(emitId=${emit.id})}" th:text="View emit">View emit</a>
+            </li>
+        </ol>
     </body>
 </html>

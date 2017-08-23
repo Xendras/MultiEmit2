@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.springframework.org/security/tags">
+    <head>
+        <title th:text="${emit.number}"> Emit </title>
+    </head>
+    <body>
+        <h1 th:text="${emit.number}"> Emit number </h1>
+
+        <h2>Emit information</h2>
+
+        <div>
+            Number: <span th:text="${emit.name}"/><br/>
+            Owner: <a th:href="@{/competitors/{competitorId}(competitorId=${emit.owner.id})}" th:text="${emit.owner.name}"/><br/>
+            Emit punches:     
+            <ol th:each = "punch : ${emitPunches}">
+                <li>
+                <span th:text="${punch.punchCode}">punch code</span>
+                <span th:text="${punch.timestamp}">punch timestamp</span>
+                <form th:action="@{/emits/{emitId}/punches/{punchId}(emitId=${emit.id}, punchId=${punch.id})}" th:method="DELETE">
+                    <input type="submit" value="Remove punch" th:id="${'remove-' + punch.id}"/>
+                </form>
+                </li>
+            </ol>
+        </div>
+        <form th:action="@{/emits/{emitId}(emitId=${emit.id})}" th:method="DELETE">
+            <input type="submit" value="Remove emit" th:id="${'remove-' + emit.id}"/>
+        </form>
+    </body>
+</html>
