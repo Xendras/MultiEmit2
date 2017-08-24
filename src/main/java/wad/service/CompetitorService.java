@@ -49,7 +49,8 @@ public class CompetitorService {
         competitorRepository.delete(id);
     }
 
-    public void registerEmitForCompetitor(Competitor competitor, String emitNumber) {
+    public void registerEmitForCompetitor(Competitor competitor) {
+        String emitNumber = competitor.getEmitNumber();
         Emit emit = emitService.getByNumber(emitNumber);
         if (emit == null) {
             emit = new Emit();

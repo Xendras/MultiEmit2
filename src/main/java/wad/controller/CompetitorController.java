@@ -44,8 +44,7 @@ public class CompetitorController {
             viewCompetitors(model);
             return "competitors";
         }
-        String emitNumber = competitor.getEmitNumber();
-        competitorService.registerEmitForCompetitor(competitor,emitNumber);
+        competitorService.registerEmitForCompetitor(competitor);
         return "redirect:/competitors";
     }
     

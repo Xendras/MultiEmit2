@@ -108,16 +108,7 @@ public class CompetitionController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.POST)
     public String addCompetitorToCompetition(@PathVariable Long id, @RequestParam Long competitorId) {
-        Competitor competitor = competitorService.getCompetitor(competitorId);
-        Competition competition = competitionService.getCompetition(id);
-        List<Competitor> competitors = competition.getCompetitors();
-        if (competitors.contains(competitor)) {
-            return "redirect:/competitions/{id}";
-        }
-        competitors.add(competitor);
-        competition.setCompetitors(competitors);
-        competitionService.saveCompetition(competition);
-        competitorService.saveCompetitor(competitor);
+        competitionService.addCompetitorToCompetition(competitorId, id);
         return "redirect:/competitions/{id}";
     }
 
