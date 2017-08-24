@@ -45,35 +45,13 @@ public class ResultController {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public String addResults(@PathVariable Long id, @RequestParam Competitor competitor, @RequestParam List<EmitPunch> punches){
-        Competition competition = competitionService.getCompetition(id);
-        
-        Result result = new Result();
-        result.setCompetitor(competitor);
-        result.setCompetition(competition);
-        result.setPunches(punches);
-        
-        List<Result> results = competition.getResults();
-        List<Result> competitorResults = competitor.getResults();
-        competitorResults.add(result);
-        results.add(result);
-        
-        competition.setResults(results);
-        competitor.setResults(competitorResults);
-        
-        competitionService.saveCompetition(competition);
-        competitorService.saveCompetitor(competitor);
-        resultService.saveResult(result);
-        
+    public String addResult(@PathVariable Long id, @RequestParam Competitor competitor, @RequestParam List<EmitPunch> punches){
+        resultService.addResult(id, competitor, punches);
         return "redirect:/competitions/{id}";
     }
     
     @RequestMapping(value = "/{resultId}", method = RequestMethod.DELETE)
     public String removeResult(@PathVariable Long id, @PathVariable Long resultId){
-        Result result = resultService.getResult(resultId);
-        Competition competition = competitionService.getCompetition(id);
-        competition.getResults().remove(result);
-        competitionService.saveCompetition(competition);
         resultService.deleteResult(resultId);
         return "redirect:/competitions/{id}";
     }

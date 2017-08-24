@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import wad.domain.Competition;
 import wad.domain.Competitor;
 import wad.domain.Emit;
+import wad.domain.EmitPunch;
 import wad.domain.Result;
 import wad.repository.ResultRepository;
 
@@ -35,6 +36,28 @@ public class ResultService {
     
     public Result getResult(Long id){
         return resultRepository.findOne(id);
+    }
+    
+    public void addResult(Long competitionId, Competitor competitor, List<EmitPunch> punches){
+        Competition competition = competitionService.getCompetition(competitionId);
+        
+        Result result = new Result();
+        result.setCompetitor(competitor);
+        result.setCompetition(competition);
+        result.setPunches(punches);
+        
+        List<Result> results = competition.getResults();
+        List<Result> competitorResults = competitor.getResults();
+        competitorResults.add(result);
+        results.add(result);
+        
+        competition.setResults(results);
+        competitor.setResults(competitorResults);
+        
+        competitionService.saveCompetition(competition);
+        competitorService.saveCompetitor(competitor);
+        
+        resultRepository.save(result);
     }
     
     public void deleteResult(Long id){

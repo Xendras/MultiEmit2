@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import wad.domain.Competitor;
 import wad.domain.Emit;
 import wad.domain.EmitPunch;
 import wad.repository.EmitRepository;
@@ -16,6 +17,9 @@ public class EmitService {
     
     @Autowired
     private EmitRepository emitRepository;
+    
+    @Autowired
+    private EmitPunchService emitPunchService;
     
     @Autowired
     private CompetitorService competitorService;
@@ -34,8 +38,17 @@ public class EmitService {
     
     public void deleteEmit(Long id){
         Emit emit = emitRepository.findOne(id);
-        emit.getOwner().setEmit(null);
-        competitorService.saveCompetitor(emit.getOwner());
+        
+        Competitor owner = emit.getOwner();
+        owner.setEmit(null);
+        owner.setEmitNumber(null);
+        competitorService.saveCompetitor(owner);
+        
+        List<EmitPunch> punches = emit.getEmitPunches();
+        emit.setEmitPunches(null);
+        for(EmitPunch punch : punches){
+            emitPunchService.deleteEmitPunch(punch.getId());
+        }
         emitRepository.delete(id);
     }   
     
