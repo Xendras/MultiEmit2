@@ -15,12 +15,20 @@
             <ol>
                 <li th:each = "punch : ${emit.emitPunches}">
                 <span th:text="${punch.punchCode}">punch code</span>
-                <span th:text="${punch.timestamp}">punch timestamp</span>
+                <span th:text="${punch.punchTime}">punch timestamp</span>
                 <form th:action="@{/emits/{emitId}/punches/{punchId}(emitId=${emit.id}, punchId=${punch.id})}" th:method="DELETE">
                     <input type="submit" value="Remove punch" th:id="${'remove-' + punch.id}"/>
                 </form>
                 </li>
             </ol>
+            Add new emit punch:
+            <form  action="#" th:action="@{/emits/{emitId}(emitId=${emit.id})}" th:object="${emitPunch}" method="POST">
+                Punch code: <input type="text" th:field="*{punchCode}"/>
+                <span th:if="${#fields.hasErrors('punchCode')}" th:errors="*{punchCode}">Punchcode error message</span><br/>
+                Timestamp: <input type="datetime-local" step="1" th:field="*{punchTimeString}"/>
+                <span th:if="${#fields.hasErrors('punchTimeString')}" th:errors="*{punchTimeString}">Timestamp error message</span><br/>
+                <input type="submit"/>            
+            </form>
         </div>
         <form th:action="@{/emits/{emitId}(emitId=${emit.id})}" th:method="DELETE">
             <input type="submit" value="Remove emit" th:id="${'remove-' + emit.id}"/>

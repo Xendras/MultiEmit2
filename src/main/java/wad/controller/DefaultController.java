@@ -22,6 +22,7 @@ public class DefaultController {
     @PostConstruct
     public void init() {
         UserAccount admin = new UserAccount();
+        userAccountRepository.save(admin);
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin"));
         List<String> adminAuthorities = new ArrayList<>();
@@ -31,6 +32,7 @@ public class DefaultController {
         userAccountRepository.save(admin);
         
         UserAccount user = new UserAccount();
+        userAccountRepository.save(user);
         user.setUsername("user");
         user.setPassword(passwordEncoder.encode("user"));
         List<String> userAuthorities = new ArrayList<>();

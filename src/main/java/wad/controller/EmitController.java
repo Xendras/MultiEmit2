@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import wad.domain.Competitor;
 import wad.domain.Emit;
+import wad.domain.EmitPunch;
 import wad.service.CompetitorService;
 import wad.service.EmitService;
 
@@ -25,9 +25,14 @@ public class EmitController {
     @Autowired
     private EmitService emitService;
     
-    @ModelAttribute
+    @ModelAttribute("inputEmit")
     private Emit getEmit() {
         return new Emit();
+    }
+    
+    @ModelAttribute("emitPunch")
+    private EmitPunch getEmitPunch() {
+        return new EmitPunch();
     }
 
     @RequestMapping(value = "/emits", method = RequestMethod.GET)
@@ -35,21 +40,20 @@ public class EmitController {
         model.addAttribute("emits", emitService.getEmits());
         return "emits";
     }
-    
-    @Transactional
+
     @RequestMapping(value = "/emits", method = RequestMethod.POST)
-    public String addEmit(@Valid @ModelAttribute("emit") Emit emit, BindingResult bindingResult, Model model) {
+    public String addEmit(@Valid @ModelAttribute("inputEmit") Emit inputEmit, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
             viewEmits(model);
             return "emits";
         }
-        String number = emit.getNumber();
+        String number = inputEmit.getNumber();
         for(Emit otherEmit : emitService.getEmits()){
             if(otherEmit.getNumber().equals(number)){
                 return "redirect:/emits";
             }
         }
-        emitService.saveEmit(emit);
+        emitService.saveEmit(inputEmit);
         return "redirect:/emits";
     }
     
@@ -57,7 +61,6 @@ public class EmitController {
     public String viewEmit(@PathVariable Long id, Model model) {
         Emit emit = emitService.getEmit(id);
         model.addAttribute("emit", emit);
-        model.addAttribute("emitPunches", emit.getEmitPunches());
         return "emit";
     }
     

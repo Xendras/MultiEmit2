@@ -30,7 +30,7 @@ public class EmitPunchController {
     @Autowired
     private EmitPunchService emitPunchService;
     
-    @ModelAttribute
+    @ModelAttribute("emitPunch")
     private EmitPunch getEmitPunch() {
         return new EmitPunch();
     }
@@ -41,13 +41,13 @@ public class EmitPunchController {
         return "emits";
     }
     
-    @Transactional
     @RequestMapping(method = RequestMethod.POST)
-    public String addEmitPunch(@Valid @ModelAttribute("emitPunch") EmitPunch emitPunch, BindingResult bindingResult, Model model) {
+    public String addEmitPunch(@PathVariable Long emitId, @Valid @ModelAttribute EmitPunch emitPunch, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
-            viewEmitPunches(model);
+            model.addAttribute("emit",emitService.getEmit(emitId));
             return "emit";
         }
+        emitPunchService.addEmitPunchToEmit(emitPunch, emitId);
         return "redirect:/emits/{emitId}";
     }
     

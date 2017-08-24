@@ -13,14 +13,13 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class EmitPunch extends AbstractPersistable<Long>{
     
-    @NotNull
     @OneToOne
     private Emit emit;
     @NotBlank
     private String punchCode;
-    @NotNull
     @Temporal(TemporalType.TIMESTAMP)
-    private Date timestamp;
+    private Date punchTime;
+    private String punchTimeString;
     
     public EmitPunch() {
 
@@ -29,7 +28,7 @@ public class EmitPunch extends AbstractPersistable<Long>{
     public EmitPunch(Emit emit, String code, Date timestamp) {
         this.emit = emit;
         this.punchCode = code;
-        this.timestamp = timestamp;
+        this.punchTime = timestamp;
     }
     
     public Emit getEmit(){
@@ -48,12 +47,20 @@ public class EmitPunch extends AbstractPersistable<Long>{
         this.punchCode = newCode;
     }
     
-    public Date getTimestamp(){
-        return this.timestamp;
+    public String getPunchTimeString(){
+        return this.punchTimeString;
     }
     
-    public void setTimestamp(Date newTimestamp){
-        this.timestamp = newTimestamp;
+    public void setPunchTimeString(String newPunchTimeString){
+        this.punchTimeString = newPunchTimeString;
+    }
+    
+    public Date getPunchTime(){
+        return this.punchTime;
+    }
+    
+    public void setPunchTime(Date newPunchTime){
+        this.punchTime = newPunchTime;
     }
     
 }

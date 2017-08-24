@@ -37,7 +37,7 @@ public class CompetitorService {
         Competitor competitor = competitorRepository.findOne(id);
         Emit emit = competitor.getEmit();
         if (emit != null) {
-            emit.setCompetitor(null);
+            emit.setOwner(null);
         }
         competitorRepository.delete(id);
     }
@@ -49,10 +49,10 @@ public class CompetitorService {
             emit = new Emit();
             emit.setNumber(emitNumber);
             emitService.saveEmit(emit);
-            emit.setCompetitor(competitor);
+            emit.setOwner(competitor);
             competitor.setEmit(emit);
         } else if (emit.getOwner() == null) {
-            emit.setCompetitor(competitor);
+            emit.setOwner(competitor);
             competitor.setEmit(emit);
         } else {
             return;

@@ -2,7 +2,6 @@ C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\config\Pr
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\controller\DefaultController.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\profile\ProductionProfile.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\config\DefaultSecurityConfiguration.java
-C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\config\InitSecurityConfiguration.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\domain\EmitPunch.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\MultiEmitApplication.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\service\CompetitionService.java
@@ -15,6 +14,7 @@ C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\repositor
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\domain\Result.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\domain\Competition.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\domain\Emit.java
+C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\config\InitTestCasesConfiguration.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\repository\UserAccountRepository.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\domain\Competitor.java
 C:\Users\Xendra\Documents\NetBeansProjects\MultiEmit\src\main\java\wad\controller\IndexController.java

@@ -73,7 +73,7 @@ public class EmitService {
         List<String> splits = new ArrayList<>();
 
         for (int i = 0; i < punches.size() - 1; i++) {
-            Long split = punches.get(i + 1).getTimestamp().getTime() - punches.get(i).getTimestamp().getTime();
+            Long split = punches.get(i + 1).getPunchTime().getTime() - punches.get(i).getPunchTime().getTime();
             splits.add(millisecondsToMinutesSeconds(split));
         }
 
@@ -86,7 +86,7 @@ public class EmitService {
         List<String> cumulative = new ArrayList<>();
         Long cumulativeSplit = 0L;
         for (int i = 0; i < punches.size() - 1; i++) {
-            cumulativeSplit += punches.get(i + 1).getTimestamp().getTime() - punches.get(i).getTimestamp().getTime();
+            cumulativeSplit += punches.get(i + 1).getPunchTime().getTime() - punches.get(i).getPunchTime().getTime();
             cumulative.add(millisecondsToMinutesSeconds(cumulativeSplit));
         }
 
@@ -100,8 +100,8 @@ public class EmitService {
         Long cumulativeSplit = 0L;
         for (int i = 0; i < punches.size() - 1; i++) {
             currentPunch = punches.get(i + 1);
-            cumulativeSplit += punches.get(i + 1).getTimestamp().getTime() - punches.get(i).getTimestamp().getTime();
-            Long split = punches.get(i + 1).getTimestamp().getTime() - punches.get(i).getTimestamp().getTime();
+            cumulativeSplit += punches.get(i + 1).getPunchTime().getTime() - punches.get(i).getPunchTime().getTime();
+            Long split = punches.get(i + 1).getPunchTime().getTime() - punches.get(i).getPunchTime().getTime();
             printableSplits.add(millisecondsToMinutesSeconds(split) + " " + millisecondsToMinutesSeconds(cumulativeSplit) + " " + currentPunch.getPunchCode());
         }
 

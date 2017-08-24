@@ -42,6 +42,12 @@ public class ResultService {
         Competitor competitor = competitorService.getCompetitor(competitorId);
         Competition competition = competitionService.getCompetition(competitionId);
         
+        for(Result result : competition.getResults()){
+            if(result.getCompetitorEmitNumber().equals(competitor.getEmit().getNumber())){
+                return;
+            }
+        }
+        
         Result result = new Result();
         result.setCompetitorName(competitor.getName());
         result.setCompetitorClub(competitor.getClub());

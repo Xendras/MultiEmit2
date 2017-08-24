@@ -10,7 +10,7 @@
 
         <div>
             Enter information and press Submit:<br/>
-            <form action="#" th:action="@{/emits}" th:object="${emit}" method="POST">
+            <form action="#" th:action="@{/emits}" th:object="${inputEmit}" method="POST">
                 Emit number: <input type="text" th:field="*{number}"/>
                 <span th:if="${#fields.hasErrors('number')}" th:errors="*{number}">Number error message</span><br/>
                 <input type="submit"/>            

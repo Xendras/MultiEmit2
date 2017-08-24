@@ -41,7 +41,7 @@ public class Emit extends AbstractPersistable<Long> {
         return this.owner;
     }
 
-    public void setCompetitor(Competitor newOwner) {
+    public void setOwner(Competitor newOwner) {
         this.owner = newOwner;
     }
 

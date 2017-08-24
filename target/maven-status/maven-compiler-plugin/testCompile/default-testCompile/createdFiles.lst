@@ -1,1 +1,5 @@
 wad\service\CompetitionServiceTest.class
+wad\service\CompetitorServiceTest.class
+wad\service\EmitServiceTest.class
+wad\service\ResultServiceTest.class
+wad\service\EmitPunchServiceTest.class

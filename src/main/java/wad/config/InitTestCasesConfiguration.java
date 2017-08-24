@@ -48,7 +48,7 @@ public class InitTestCasesConfiguration {
         emitService.saveEmit(emit);
         Competitor competitor = new Competitor("Jonas Westerlund", "OK77", emit);
         competitorService.saveCompetitor(competitor);
-        emit.setCompetitor(competitor);
+        emit.setOwner(competitor);
         competitorService.saveCompetitor(competitor);
         emitService.saveEmit(emit);
 
@@ -56,7 +56,7 @@ public class InitTestCasesConfiguration {
         emitService.saveEmit(emit2);
         Competitor competitor2 = new Competitor("Sandra Kulla", "IK Falken", emit2);
         competitorService.saveCompetitor(competitor2);
-        emit2.setCompetitor(competitor2);
+        emit2.setOwner(competitor2);
         competitorService.saveCompetitor(competitor2);
         emitService.saveEmit(emit2);
         

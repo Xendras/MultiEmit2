@@ -30,6 +30,11 @@ public class CompetitorController {
     private Competitor getCompetitor() {
         return new Competitor();
     }
+    
+    @ModelAttribute("emit")
+    private Emit getEmit() {
+        return new Emit();
+    }
 
     @RequestMapping(method = RequestMethod.GET)
     public String viewCompetitors(Model model) {
@@ -48,16 +53,15 @@ public class CompetitorController {
         return "redirect:/competitors";
     }
     
-    @ModelAttribute("emit")
     @RequestMapping(value = "/{competitorId}", method = RequestMethod.POST)
-    public String registerEmitForCompetitor(@PathVariable Long competitorId, @Valid Emit emit, BindingResult bindingResult, Model model) {
+    public String registerEmitForCompetitor(@PathVariable Long competitorId, @Valid @ModelAttribute Emit emit, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
-            viewCompetitors(model);
+            viewCompetitor(competitorId,model);
             return "competitor";
         }
         
         competitorService.registerEmitForCompetitor(competitorService.getCompetitor(competitorId), emit.getNumber());
-        return "redirect:/competitors";
+        return "redirect:/competitors/{competitorId}";
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
