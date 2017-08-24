@@ -9,17 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wad.domain.Emit;
 import wad.domain.EmitPunch;
-import wad.repository.CompetitorRepository;
 import wad.repository.EmitRepository;
 
 @Service
 public class EmitService {
     
     @Autowired
-    private CompetitorRepository competitorRepository;
+    private EmitRepository emitRepository;
     
     @Autowired
-    private EmitRepository emitRepository;
+    private CompetitorService competitorService;
     
     public void saveEmit(Emit emit){
         emitRepository.save(emit);
@@ -34,6 +33,9 @@ public class EmitService {
     }
     
     public void deleteEmit(Long id){
+        Emit emit = emitRepository.findOne(id);
+        emit.getOwner().setEmit(null);
+        competitorService.saveCompetitor(emit.getOwner());
         emitRepository.delete(id);
     }   
     

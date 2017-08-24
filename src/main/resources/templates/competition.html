@@ -31,7 +31,7 @@
         </ol>
         <form th:action="@{/competitions/{id}(id=${competition.id})}"  method="POST">
             <select name = "competitorId">
-                <option th:each="competitor : ${competitors}" th:value="${competitor.id}" th:text="${competitor.name}+' '+${competitor.emit.number}">competitor</option>
+                <option th:each="competitor : ${CompetitionCompetitors}" th:if="${competitor.emit != null}" th:value="${competitor.id}" th:text="${competitor.name}+' '+${competitor.emit.number}">competitor</option>
             </select>    
             <input type="submit" value="Add competitor"/>
         </form>

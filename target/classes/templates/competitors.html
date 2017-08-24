@@ -27,7 +27,7 @@
             <li th:each="competitor : ${competitors}">
                 <span th:text="${competitor.name}">competitor name</span>, 
                 <span th:text="${competitor.club}">competitor club</span>, 
-                emit: <span th:text="${competitor.emit.number}">competitor emit</span>
+                emit: <span th:if="${competitor.emit != null}" th:text="${competitor.emit.number}">competitor emit</span>
                 <a th:href="@{/competitors/{competitorId}(competitorId=${competitor.id})}" th:text="View">View competitor</a>
             </li>
         </ol>
