@@ -14,7 +14,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class UserAccount extends AbstractPersistable<Long>{
     
     @NotBlank
-    @Length(min = 2, max = 10)
+    @Length(min = 2)
     private String username;
     @NotBlank
     private String password;
