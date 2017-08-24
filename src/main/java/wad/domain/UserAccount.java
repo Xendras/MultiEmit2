@@ -5,21 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import org.hibernate.validator.constraints.Length;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.persistence.FetchType;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class UserAccount extends AbstractPersistable<Long>{
     
-    @NotBlank
-    @Length(min = 2)
     private String username;
-    @NotBlank
     private String password;
-    @NotEmpty
-    @ElementCollection()
+    @ElementCollection(fetch = FetchType.EAGER)
     private List<String> authorities;
     
     public String getUsername(){
