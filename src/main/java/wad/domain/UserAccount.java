@@ -18,10 +18,9 @@ public class UserAccount extends AbstractPersistable<Long>{
     @Length(min = 2, max = 10)
     private String username;
     @NotBlank
-    @Length(min = 2, max = 200)
     private String password;
     @NotEmpty
-    @ElementCollection(fetch = FetchType.EAGER)
+    @ElementCollection()
     private List<String> authorities;
     
     public String getUsername(){
