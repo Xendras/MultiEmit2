@@ -49,8 +49,9 @@ public class CompetitorService {
             emit = new Emit();
             emit.setNumber(emitNumber);
             emitService.saveEmit(emit);
-            emit.setOwner(competitor);
             competitor.setEmit(emit);
+            competitorRepository.save(competitor);
+            emit.setOwner(competitor);
         } else if (emit.getOwner() == null) {
             emit.setOwner(competitor);
             competitor.setEmit(emit);

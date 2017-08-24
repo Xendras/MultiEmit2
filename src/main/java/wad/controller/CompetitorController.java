@@ -48,7 +48,6 @@ public class CompetitorController {
             viewCompetitors(model);
             return "competitors";
         }
-        competitorService.saveCompetitor(competitor);
         competitorService.registerEmitForCompetitor(competitor, competitor.getEmitNumber());
         return "redirect:/competitors";
     }
