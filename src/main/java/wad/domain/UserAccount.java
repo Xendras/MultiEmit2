@@ -13,6 +13,7 @@ public class UserAccount extends AbstractPersistable<Long>{
     
     private String username;
     private String password;
+    
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> authorities;
     
@@ -33,9 +34,6 @@ public class UserAccount extends AbstractPersistable<Long>{
     }
     
     public List<String> getAuthorities(){
-        if (this.authorities == null) {
-            this.authorities = new ArrayList<>();
-        }
         return this.authorities;
     }
     
