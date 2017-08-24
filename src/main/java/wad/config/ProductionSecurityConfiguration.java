@@ -33,6 +33,10 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+        auth.inMemoryAuthentication()
+                .withUser("admin").password("admin").roles("ADMIN");
+        auth.inMemoryAuthentication()
+                .withUser("user").password("user").roles("USER");
     }
     
     @Bean
