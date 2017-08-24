@@ -38,21 +38,22 @@ public class ResultService {
         return resultRepository.findOne(id);
     }
     
-    public void addResult(Long competitionId, Competitor competitor, List<EmitPunch> punches){
+    public void addResult(Long competitionId, Long competitorId){
+        Competitor competitor = competitorService.getCompetitor(competitorId);
         Competition competition = competitionService.getCompetition(competitionId);
         
         Result result = new Result();
-        result.setCompetitor(competitor);
+        result.setCompetitorName(competitor.getName());
+        result.setCompetitorClub(competitor.getClub());
+        result.setCompetitorEmitNumber(competitor.getEmit().getNumber());
+        resultRepository.save(result);
+        initialiseResultFromEmit(result,competitor.getEmit());
         result.setCompetition(competition);
-        result.setPunches(punches);
         
         List<Result> results = competition.getResults();
-        List<Result> competitorResults = competitor.getResults();
-        competitorResults.add(result);
         results.add(result);
         
         competition.setResults(results);
-        competitor.setResults(competitorResults);
         
         competitionService.saveCompetition(competition);
         competitorService.saveCompetitor(competitor);

@@ -1,4 +1,3 @@
-
 package wad.service;
 
 import java.text.SimpleDateFormat;
@@ -14,23 +13,26 @@ import wad.repository.EmitPunchRepository;
 
 @Service
 public class EmitPunchService {
-    
+
     @Autowired
     private EmitPunchRepository emitPunchRepository;
-    
-    public void saveEmitPunch(EmitPunch emitPunch){
+
+    public void saveEmitPunch(EmitPunch emitPunch) {
         emitPunchRepository.save(emitPunch);
     }
-    
-    public List<EmitPunch> getEmitPunches(){
+
+    public List<EmitPunch> getEmitPunches() {
         return emitPunchRepository.findAll();
     }
-    
-    public EmitPunch getEmitPunch(Long id){
+
+    public EmitPunch getEmitPunch(Long id) {
         return emitPunchRepository.findOne(id);
     }
-    
-    public void deleteEmitPunch(Long id){
+
+    public void deleteEmitPunch(Long id) {
+        EmitPunch emitPunch = emitPunchRepository.findOne(id);
+        Emit emit = emitPunch.getEmit();
+        emit.getEmitPunches().remove(emitPunch);
         emitPunchRepository.delete(id);
-    }   
+    }
 }

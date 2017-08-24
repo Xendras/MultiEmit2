@@ -1,9 +1,60 @@
 
 package wad.controller;
 
-import org.springframework.web.bind.annotation.RestController;
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import wad.domain.Emit;
+import wad.domain.EmitPunch;
+import wad.service.CompetitorService;
+import wad.service.EmitPunchService;
+import wad.service.EmitService;
 
-@RestController
+@Controller
+@RequestMapping("/emits/{emitId}")
 public class EmitPunchController {
+    
+    @Autowired
+    private CompetitorService competitorService;
+    
+    @Autowired
+    private EmitService emitService;
+    
+    @Autowired
+    private EmitPunchService emitPunchService;
+    
+    @ModelAttribute
+    private EmitPunch getEmitPunch() {
+        return new EmitPunch();
+    }
+
+    @RequestMapping(value = "/punches", method = RequestMethod.GET)
+    public String viewEmitPunches(Model model) {
+        model.addAttribute("emitPunches", emitPunchService.getEmitPunches());
+        return "emits";
+    }
+    
+    @Transactional
+    @RequestMapping(method = RequestMethod.POST)
+    public String addEmitPunch(@Valid @ModelAttribute("emitPunch") EmitPunch emitPunch, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()){
+            viewEmitPunches(model);
+            return "emit";
+        }
+        return "redirect:/emits/{emitId}";
+    }
+    
+    @RequestMapping(value = "/punches/{punchId}", method = RequestMethod.DELETE)
+    public String deleteEmitPunch(@PathVariable Long emitId, @PathVariable Long punchId) {
+        emitPunchService.deleteEmitPunch(punchId);
+        return "redirect:/emits/{emitId}";
+    }
     
 }

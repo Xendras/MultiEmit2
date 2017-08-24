@@ -45,8 +45,8 @@ public class ResultController {
     }
     
     @RequestMapping(method = RequestMethod.POST)
-    public String addResult(@PathVariable Long id, @RequestParam Competitor competitor, @RequestParam List<EmitPunch> punches){
-        resultService.addResult(id, competitor, punches);
+    public String addResult(@PathVariable Long id, @RequestParam Long competitorId){
+        resultService.addResult(id, competitorId);
         return "redirect:/competitions/{id}";
     }
     

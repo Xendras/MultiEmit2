@@ -30,7 +30,7 @@
                     on the <span th:text="${#dates.format(competition.date, 'yyyy-MM-dd')}">competition date</span>
                 <a th:href="@{/competitions/{competitionId}(competitionId=${competition.id})}" th:text="View">View competition</a>
             </li>
-        </ol>
+        </ol><br/>
         
         <a th:href="@{/index}" th:text="Index">View index</a>
     </body>

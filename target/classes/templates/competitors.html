@@ -30,7 +30,7 @@
                 emit: <span th:if="${competitor.emit != null}" th:text="${competitor.emit.number}">competitor emit</span>
                 <a th:href="@{/competitors/{competitorId}(competitorId=${competitor.id})}" th:text="View">View competitor</a>
             </li>
-        </ol>
+        </ol><br/>
         
         <a th:href="@{/index}" th:text="Index">View index</a>
     </body>

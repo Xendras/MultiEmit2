@@ -36,15 +36,27 @@ public class CompetitorController {
         model.addAttribute("competitors", competitorService.getCompetitors());
         return "competitors";
     }
-    
-    @Transactional
+
     @RequestMapping(method = RequestMethod.POST)
     public String addCompetitor(@Valid @ModelAttribute("competitor") Competitor competitor, BindingResult bindingResult, Model model) {
         if(bindingResult.hasErrors()){
             viewCompetitors(model);
             return "competitors";
         }
-        competitorService.registerEmitForCompetitor(competitor);
+        competitorService.saveCompetitor(competitor);
+        competitorService.registerEmitForCompetitor(competitor, competitor.getEmitNumber());
+        return "redirect:/competitors";
+    }
+    
+    @ModelAttribute("emit")
+    @RequestMapping(value = "/{competitorId}", method = RequestMethod.POST)
+    public String registerEmitForCompetitor(@PathVariable Long competitorId, @Valid Emit emit, BindingResult bindingResult, Model model) {
+        if(bindingResult.hasErrors()){
+            viewCompetitors(model);
+            return "competitor";
+        }
+        
+        competitorService.registerEmitForCompetitor(competitorService.getCompetitor(competitorId), emit.getNumber());
         return "redirect:/competitors";
     }
     

@@ -6,21 +6,18 @@ import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
 public class Result extends AbstractPersistable<Long>{
     
-    @ManyToOne
-    private Competitor competitor;
+    @NotBlank
+    private String competitorName;
+    private String competitorClub;
+    private String competitorEmitNumber;
     @ManyToOne
     private Competition competition;
-    @OneToMany
-    private List<EmitPunch> punches; 
     @ElementCollection
     private List<String> splits;
     @ElementCollection
@@ -34,18 +31,35 @@ public class Result extends AbstractPersistable<Long>{
 
     }
 
-    public Result(Competitor competitor, Competition competition, List<EmitPunch> punches) {
-        this.competitor = competitor;
+    public Result(Competitor competitor, Competition competition) {
+        this.competitorName = competitor.getName();
+        this.competitorClub = competitor.getClub();
+        this.competitorEmitNumber = competitor.getEmit().getNumber();
         this.competition = competition;
-        this.punches = punches;
     }
     
-    public Competitor getCompetitor(){
-        return this.competitor;
+    public String getCompetitorName(){
+        return this.competitorName;
     }
     
-    public void setCompetitor(Competitor newCompetitor){
-        this.competitor = newCompetitor;
+    public void setCompetitorName(String newCompetitorName){
+        this.competitorName = newCompetitorName;
+    }
+    
+    public String getCompetitorClub(){
+        return this.competitorClub;
+    }
+    
+    public void setCompetitorClub(String newCompetitorClub){
+        this.competitorClub = newCompetitorClub;
+    }
+    
+    public String getCompetitorEmitNumber(){
+        return this.competitorEmitNumber;
+    }
+    
+    public void setCompetitorEmitNumber(String newCompetitorEmitNumber){
+        this.competitorEmitNumber = newCompetitorEmitNumber;
     }
     
     public Competition getCompetition(){
@@ -54,17 +68,6 @@ public class Result extends AbstractPersistable<Long>{
     
     public void setCompetition(Competition newCompetition){
         this.competition = newCompetition;
-    }
-    
-    public List<EmitPunch> getPunches(){
-        if (this.punches == null) {
-            this.punches = new ArrayList<>();
-        }
-        return this.punches;
-    }
-    
-    public void setPunches(List<EmitPunch> newPunches){
-        this.punches = newPunches;
     }
     
     public List<String> getSplits(){

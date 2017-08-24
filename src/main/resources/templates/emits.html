@@ -25,7 +25,7 @@
                 <span th:if="${emit.owner != null}" th:text="${emit.owner.name}">emit owner name</span>
                 <a th:href="@{/emits/{emitId}(emitId=${emit.id})}" th:text="View">View emit</a>
             </li>
-        </ol>
+        </ol><br/>
         
         <a th:href="@{/index}" th:text="Index">View index</a>
     </body>

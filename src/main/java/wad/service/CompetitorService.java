@@ -17,7 +17,7 @@ public class CompetitorService {
 
     @Autowired
     private EmitService emitService;
-    
+
     @Autowired
     private ResultService resultService;
 
@@ -36,33 +36,28 @@ public class CompetitorService {
     public void deleteCompetitor(Long id) {
         Competitor competitor = competitorRepository.findOne(id);
         Emit emit = competitor.getEmit();
-        emit.setCompetitor(null);
-        competitor.setEmit(null);
-        List<Result> results = competitor.getResults();
-        for(Result result : results){
-            result.setCompetitor(null);
-        }
-        competitor.setResults(null);
-        for(Result result : results){
-            resultService.deleteResult(result.getId());
+        if (emit != null) {
+            emit.setCompetitor(null);
         }
         competitorRepository.delete(id);
     }
 
-    public void registerEmitForCompetitor(Competitor competitor) {
-        String emitNumber = competitor.getEmitNumber();
+    public void registerEmitForCompetitor(Competitor competitor, String emitNumber) {
         Emit emit = emitService.getByNumber(emitNumber);
+        
         if (emit == null) {
             emit = new Emit();
             emit.setNumber(emitNumber);
+            emitService.saveEmit(emit);
             emit.setCompetitor(competitor);
             competitor.setEmit(emit);
-        } else if(emit.getOwner() == null){
+        } else if (emit.getOwner() == null) {
             emit.setCompetitor(competitor);
             competitor.setEmit(emit);
         } else {
             return;
         }
+        
         competitorRepository.save(competitor);
         emitService.saveEmit(emit);
     }

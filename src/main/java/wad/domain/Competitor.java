@@ -18,8 +18,8 @@ public class Competitor extends AbstractPersistable<Long>{
     private String emitNumber;
     @NotBlank
     private String club;
-    @OneToMany
-    private List<Result> results;
+//    @OneToMany
+//    private List<Result> results;
     
     public Competitor() {
 
@@ -63,12 +63,12 @@ public class Competitor extends AbstractPersistable<Long>{
         this.club = newClub;
     }
     
-    public List<Result> getResults() {
-        return this.results;
-    }
-
-    public void setResults(List<Result> newResults) {
-        this.results = newResults;
-    }
+//    public List<Result> getResults() {
+//        return this.results;
+//    }
+//
+//    public void setResults(List<Result> newResults) {
+//        this.results = newResults;
+//    }
     
 }
