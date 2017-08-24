@@ -1,0 +1,38 @@
+MultiEmit
+Jonas Westerlund, 2017
+
+Description
+MultiEmit is a web-based results management application centered around the electronic EMIT-systems. 
+The EMIT-cards and punches are widely used in orienteering and multisports to authenticate that the competitors 
+have visited the required points during the competition. The system tries to emulate roughly what happens when 
+a EMIT-card is registered at multiple controls and then read in the results service. More detailed information on the 
+EMIT-systems can be found on the webpage, unfortunately only in Finnish: https://fi.wikipedia.org/wiki/Emit.
+
+User instructions
+The application requires a login with correct credentials. Currently the application only has two user accounts. 
+These are username:admin password: admin, and username:user password:user. The admin account has full privileges 
+for editing and viewing. The user account has only viewing privileges and no access to the Emit-pages.
+The application is divided into three major parts: the competitions, the competitors, and the EMIT-cards. Each 
+competition consists of a name, location, and date. Each competitor has a name, club, and an unique EMIT-card. Each 
+EMIT-card can only have one owner at one time. This makes it possible to identify each competitor by their EMIT-number. 
+Each EMIT-card has a unique number, and a list of successful EmitPunches at different controls. Each EmitPunch contains 
+the code of the control as well as a timestamp.
+
+Services and functions
+The following services are central to the result application:
+-	Adding, viewing, and removing competitors
+-	Adding, viewing, and removing competitions
+-	Adding, viewing and removing EMIT-cards
+-	Editing the content of the EMIT-cards (EmitPunches)
+-	Adding competitors to different competitions
+-	Adding results to competitions based on the contents of a competitors EMIT-card
+-	Associating a competitor with an existing EMIT-card
+
+Services and functions not implemented
+The following services and functions were unfortunately not implemented:
+-	Sorting the list of competition results by final time
+-	Giving better headings for result lists, more of a formatting question. For example the results list is not very informative.
+-	Adding a control list to competitions which validates a result by a competitor. If there are controls missing the result will be marked as disqualified.
+-	Giving the admin a possibility of adding more user accounts.
+-	Setting special rules for missing controls for special competitions
+-	List-based inputs for entering many EmitPunches to an EMIT-card at once. It is unclear what the data really looks like on an EMIT-card, so preparing for that is difficult.
