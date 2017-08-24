@@ -35,5 +35,8 @@
         </form><br/>
         
         <a th:href="@{/index}" th:text="Index">View index</a>
+        <a th:href="@{/competitions}" th:text="Competitions">View competitions</a>
+        <a th:href="@{/competitors}" th:text="Competitors">View competitions</a>
+        <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/emits}" th:text="Emits">View emits</a>
     </body>
 </html>

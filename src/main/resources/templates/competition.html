@@ -13,7 +13,7 @@
             Location: <span th:text="${competition.location}"/><br/>
             Date: <span th:text="${competition.date}"/><br/>      
         </div>
-        <form th:action="@{/competitions/{id}(id=${competition.id})}" th:method="DELETE">
+        <form sec:authorize="hasAnyRole('ADMIN')" th:action="@{/competitions/{id}(id=${competition.id})}" th:method="DELETE">
             <input type="submit" value="Remove competition" th:id="${'remove-' + competition.id}"/>
         </form>
 
@@ -24,12 +24,12 @@
                 <span th:text="${competitor.name}">competitor name</span>, 
                 <span th:text="${competitor.club}">competitor club</span>, 
                 <span th:text="${competitor.emit.number}">competitor emit</span>
-                <form th:action="@{/competitions/{id}/competitors/{competitorId}(id=${competition.id}, competitorId=${competitor.id})}" th:method="DELETE">
+                <form sec:authorize="hasAnyRole('ADMIN')" th:action="@{/competitions/{id}/competitors/{competitorId}(id=${competition.id}, competitorId=${competitor.id})}" th:method="DELETE">
                     <input type="submit" value="Remove competitor" th:id="${'remove-' + competitor.id}"/>
                 </form>
             </li>
         </ol>
-        <form th:action="@{/competitions/{id}(id=${competition.id})}"  method="POST">
+        <form sec:authorize="hasAnyRole('ADMIN')" th:action="@{/competitions/{id}(id=${competition.id})}"  method="POST">
             <select name = "competitorId">
                 <option th:each="competitor : ${competitors}" th:if="${competitor.emit != null}" th:value="${competitor.id}" th:text="${competitor.name}+' '+${competitor.emit.number}">competitor</option>
             </select>    
@@ -43,7 +43,7 @@
                 <span th:text="${result.competitorName}">competitor name</span>, 
                 <span th:text="${result.competitorClub}">competitor club</span>, 
                 <span th:text="${result.competitorEmitNumber}">competitor emit</span> 
-                <form th:action="@{/competitions/{id}/results/{resultId}(id=${competition.id},resultId=${result.id})}" th:method="DELETE"> 
+                <form sec:authorize="hasAnyRole('ADMIN')" th:action="@{/competitions/{id}/results/{resultId}(id=${competition.id},resultId=${result.id})}" th:method="DELETE"> 
                     <input type="submit" value="Remove" th:id="${'remove-' + result.id}"/>
                 </form>
                 Splits:
@@ -53,8 +53,8 @@
             </li>
         </ol>
 
-        <div>
-            Enter information and press Submit:<br/>
+        <div sec:authorize="hasAnyRole('ADMIN')">
+            Choose competitor whose result should be added:<br/>
             <form th:action="@{/competitions/{id}/results(id=${competition.id})}"  method="POST">
                 Name: 
                 <select name="competitorId">
@@ -65,5 +65,8 @@
         </div><br/>
 
         <a th:href="@{/index}" th:text="Index">View index</a>
+        <a th:href="@{/competitions}" th:text="Competitions">View competitions</a>
+        <a th:href="@{/competitors}" th:text="Competitors">View competitions</a>
+        <a sec:authorize="hasAnyRole('ADMIN')" th:href="@{/emits}" th:text="Emits">View emits</a>
     </body>
 </html>
