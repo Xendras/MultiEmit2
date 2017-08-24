@@ -5,7 +5,8 @@
  */
 package wad.config;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -27,13 +28,19 @@ public class InitSecurityConfiguration {
         UserAccount admin = new UserAccount();
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin"));
-        admin.setAuthorities(Arrays.asList("ADMIN", "USER"));
+        List<String> adminAuthorities = new ArrayList<>();
+        adminAuthorities.add("ADMIN");
+        adminAuthorities.add("USER");
+        admin.setAuthorities(adminAuthorities);
         userAccountRepository.save(admin);
         
         UserAccount user = new UserAccount();
         user.setUsername("user");
         user.setPassword(passwordEncoder.encode("user"));
-        user.setAuthorities(Arrays.asList("USER"));
+        List<String> userAuthorities = new ArrayList<>();
+        userAuthorities.add("ADMIN");
+        userAuthorities.add("USER");
+        user.setAuthorities(userAuthorities);
         userAccountRepository.save(user);
     }
 
