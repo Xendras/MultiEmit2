@@ -17,7 +17,7 @@ public class Competitor extends AbstractPersistable<Long> {
     private String emitNumber;
     @NotBlank
     private String club;
-    @ManyToMany(mappedBy = "competitors")
+    @ManyToMany
     private List<Competition> competitions;
 
 

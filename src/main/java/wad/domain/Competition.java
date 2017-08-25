@@ -29,7 +29,7 @@ public class Competition extends AbstractPersistable<Long> {
     @ElementCollection
     private List<String> controls;
     
-    @ManyToMany
+    @ManyToMany(mappedBy="competitions")
     private List<Competitor> competitors;
     
     @OneToMany
