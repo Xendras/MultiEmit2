@@ -34,6 +34,7 @@ public class DefaultSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated();
         http.formLogin()
                 .permitAll();
+        http.logout().permitAll();
     }
 
     @Autowired

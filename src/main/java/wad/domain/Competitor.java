@@ -1,14 +1,15 @@
-
 package wad.domain;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
 @Entity
-public class Competitor extends AbstractPersistable<Long>{
-    
+public class Competitor extends AbstractPersistable<Long> {
+
     @NotBlank
     private String name;
     @OneToOne
@@ -16,9 +17,10 @@ public class Competitor extends AbstractPersistable<Long>{
     private String emitNumber;
     @NotBlank
     private String club;
-//    @OneToMany
-//    private List<Result> results;
-    
+    @ManyToMany(mappedBy = "competitors")
+    private List<Competition> competitions;
+
+
     public Competitor() {
 
     }
@@ -28,7 +30,7 @@ public class Competitor extends AbstractPersistable<Long>{
         this.club = club;
         this.emit = emit;
     }
-    
+
     public String getName() {
         return this.name;
     }
@@ -36,7 +38,7 @@ public class Competitor extends AbstractPersistable<Long>{
     public void setName(String newName) {
         this.name = newName;
     }
-    
+
     public String getEmitNumber() {
         return this.emitNumber;
     }
@@ -52,7 +54,7 @@ public class Competitor extends AbstractPersistable<Long>{
     public void setEmit(Emit newEmit) {
         this.emit = newEmit;
     }
-    
+
     public String getClub() {
         return this.club;
     }
@@ -60,13 +62,13 @@ public class Competitor extends AbstractPersistable<Long>{
     public void setClub(String newClub) {
         this.club = newClub;
     }
-    
-//    public List<Result> getResults() {
-//        return this.results;
-//    }
-//
-//    public void setResults(List<Result> newResults) {
-//        this.results = newResults;
-//    }
-    
+
+    public List<Competition> getCompetitions() {
+        return competitions;
+    }
+
+    public void setCompetitions(List<Competition> competitions) {
+        this.competitions = competitions;
+    }
+
 }

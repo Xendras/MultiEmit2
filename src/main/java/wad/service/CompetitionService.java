@@ -2,6 +2,7 @@
 package wad.service;
 
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wad.domain.Competition;
@@ -43,6 +44,8 @@ public class CompetitionService {
         competitionRepository.delete(id);
     }
     
+    
+    @Transactional
     public void addCompetitorToCompetition(Long competitorId, Long competitionId){
         Competitor competitor = competitorService.getCompetitor(competitorId);
         Competition competition = competitionRepository.findOne(competitionId);
@@ -52,13 +55,19 @@ public class CompetitionService {
             return;
         }
         
-        competitors.add(competitor);
-        competition.setCompetitors(competitors);
+        List<Competition> competitions = competitor.getCompetitions();
+        if (competitions.contains(competition)) {
+            return;
+        }
         
-        competitionRepository.save(competition);
-        competitorService.saveCompetitor(competitor);
+        competitors.add(competitor);
+        competitions.add(competition);
+        
+//        competitionRepository.save(competition);
+//        competitorService.saveCompetitor(competitor);
     }
     
+    @Transactional
     public void deleteCompetitorFromCompetition(Long competitorId, Long competitionId){
         Competitor competitor = competitorService.getCompetitor(competitorId);
         Competition competition = competitionRepository.findOne(competitionId);
@@ -66,8 +75,11 @@ public class CompetitionService {
         List<Competitor> competitors = competition.getCompetitors();
         competitors.remove(competitor);
         
-        competitionRepository.save(competition);
-        competitorService.saveCompetitor(competitor);
+        List<Competition> competitions = competitor.getCompetitions();
+        competitions.remove(competition);
+        
+//        competitionRepository.save(competition);
+//        competitorService.saveCompetitor(competitor);
     }
     
 }

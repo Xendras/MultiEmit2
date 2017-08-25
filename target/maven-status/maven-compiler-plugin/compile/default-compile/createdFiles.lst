@@ -16,7 +16,6 @@ wad\domain\EmitPunch.class
 wad\repository\CompetitorRepository.class
 wad\repository\EmitPunchRepository.class
 wad\service\ResultService.class
-wad\config\InitTestCasesConfiguration.class
 wad\MultiEmitApplication.class
 wad\controller\ResultController.class
 wad\repository\ResultRepository.class

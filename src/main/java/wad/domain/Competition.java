@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,12 +29,10 @@ public class Competition extends AbstractPersistable<Long> {
     @ElementCollection
     private List<String> controls;
     
-    @OneToMany
-    @ElementCollection
+    @ManyToMany
     private List<Competitor> competitors;
     
     @OneToMany
-    @ElementCollection
     private List<Result> results;
     
     public Competition() {

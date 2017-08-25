@@ -11,5 +11,6 @@
             <li><a style="font-size:30px" th:href="@{/competitors}" th:text="Competitors">Competitor link</a></li>
             <li><a style="font-size:30px" sec:authorize="hasAnyRole('ADMIN')" th:href="@{/emits}" th:text="Emits">Emits link</a></li>
         </ul>
+        <a style="font-size:20px" th:href="@{/login?logout}" th:text="Logout">Emits link</a>
     </body>
 </html>
