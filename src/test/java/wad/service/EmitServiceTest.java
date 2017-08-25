@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import wad.domain.Competition;
 import wad.repository.CompetitionRepository;
-import wad.service.CompetitionService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

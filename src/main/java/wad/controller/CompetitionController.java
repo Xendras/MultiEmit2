@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import wad.domain.Competition;
 import wad.service.CompetitionService;
 import wad.service.CompetitorService;
-import wad.service.EmitPunchService;
-import wad.service.EmitService;
-import wad.service.ResultService;
 
 @Controller
 @RequestMapping("/competitions")

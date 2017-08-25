@@ -21,27 +21,28 @@ public class ProductionSecurityConfiguration extends WebSecurityConfigurerAdapte
 
     @Autowired
     private UserDetailsService userDetailsService;
-    
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/emits").hasAnyRole("ADMIN")
-                .anyRequest().authenticated().and()
-                .formLogin().permitAll().and()
-                .logout().permitAll();
+                .antMatchers("/emits/*").hasAnyRole("ADMIN")
+                .anyRequest().authenticated();
+        http.formLogin().permitAll();
+        http.logout().permitAll();
     }
-    
+
     @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
         auth.inMemoryAuthentication()
                 .withUser("admin").password("admin").roles("ADMIN");
         auth.inMemoryAuthentication()
                 .withUser("user").password("user").roles("USER");
     }
-    
+
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }

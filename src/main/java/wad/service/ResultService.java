@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import wad.domain.Competition;
 import wad.domain.Competitor;
 import wad.domain.Emit;
-import wad.domain.EmitPunch;
 import wad.domain.Result;
 import wad.repository.ResultRepository;
 

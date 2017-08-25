@@ -28,6 +28,8 @@ public class DefaultSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().sameOrigin();
 
         http.authorizeRequests()
+                .antMatchers("/emits").hasAnyRole("ADMIN")
+                .antMatchers("/emits/*").hasAnyRole("ADMIN")
                 .antMatchers("/h2-console/*").permitAll()
                 .anyRequest().authenticated();
         http.formLogin()

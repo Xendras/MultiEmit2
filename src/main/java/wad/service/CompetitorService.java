@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import wad.domain.Competitor;
 import wad.domain.Emit;
-import wad.domain.Result;
 import wad.repository.CompetitorRepository;
-import wad.repository.EmitRepository;
 
 @Service
 public class CompetitorService {
